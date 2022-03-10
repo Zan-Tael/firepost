@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+form {
+  @apply flex flex-col;
+}
+
+svg[viewBox="0 0 24 24"] {
+  @apply w-8 h-8
+}
+
+html, body, #app {
+  @apply h-full
+}
+
+.bar {
+  @apply min-h-[3.5rem] h-14 max-h-14;
+}
