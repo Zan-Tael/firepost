@@ -43,13 +43,10 @@ const router = createRouter({
       },
     },
     {
-      path: "/:uid",
+      path: "/:username",
       name: "Profile",
       component: ProfileView,
       props: true,
-      meta: {
-        authRequired: true,
-      },
     },
   ],
 });

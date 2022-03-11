@@ -9,6 +9,7 @@ interface UserData {
   followers: Array<string>;
   username: string;
   name: string;
+  photoURL: string;
 }
 
 interface PostData {

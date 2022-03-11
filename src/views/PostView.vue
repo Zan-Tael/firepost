@@ -3,7 +3,7 @@ import { ref } from "vue";
 import PostComponent from "@/components/PostItem.vue";
 import { getPosts } from "@/utils/feedUtils";
 import type { PostData, PostDocument, UID } from "@/types/global";
-import { getUser } from "@/utils/userStore";
+import { getUserDocument } from "@/utils/userStore";
 import TopBar from "@/components/TopBar.vue";
 
 const posts = ref<Array<PostDocument>>([]);

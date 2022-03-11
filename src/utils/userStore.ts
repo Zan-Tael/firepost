@@ -1,6 +1,14 @@
 import { reactive, ref } from "vue";
 import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import type { UserDocument, UserData, UID } from "@/types/global";
 
 const userStore = ref<User | null>(null);
@@ -22,10 +30,9 @@ const getCurrentUser = (): Promise<User> => {
   });
 };
 
-const getUser = (uid: UID): Promise<UserDocument> => {
+const getUserDocument = (uid: UID): Promise<UserDocument> => {
   return new Promise((resolve, reject) => {
     const db = getFirestore();
-    const auth = getAuth();
     const docRef = doc(db, "users", uid);
     getDoc(docRef)
       .then((doc) => {
@@ -41,4 +48,25 @@ const getUser = (uid: UID): Promise<UserDocument> => {
   });
 };
 
-export { userStore, getCurrentUser, getUser, usersCache };
+const getUserDocumentFromUsername = (
+  username: string
+): Promise<UserDocument> => {
+  return new Promise((resolve, reject) => {
+    const db = getFirestore();
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("username", "==", username));
+    getDocs(q)
+      .then((querySnapshot) => {
+        resolve({ [querySnapshot.docs[0].id]: querySnapshot.docs[0].data() });
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+export {
+  userStore,
+  getCurrentUser,
+  getUserDocument,
+  getUserDocumentFromUsername,
+  usersCache,
+};

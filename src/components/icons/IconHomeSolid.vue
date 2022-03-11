@@ -5,14 +5,3 @@
       ></path>
   </svg>
 </template>
-
-<script>
-export default {
-  props: {
-    solid: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
-</script>

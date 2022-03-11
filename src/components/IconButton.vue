@@ -1,7 +1,8 @@
 <template>
     <button
-      class="w-full h-full flex items-center justify-center p-1"
+      class="w-full h-full flex items-center justify-center p-2"
       @click="navigate"
+      :class="[isActive ? 'bg-blue-500 fill-white' : '' ]"
     >
      <slot> </slot></button
   >
@@ -10,7 +11,7 @@
 <script>
 export default {
   props: {
-    to: String,
+    isActive: Boolean,
   },
 };
 </script>

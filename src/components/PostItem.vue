@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
-import { getUser } from "@/utils/userStore";
+import { getUserDocument } from "@/utils/userStore";
 
 import TimeAgo from "javascript-time-ago";
 
@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 const [uid, data] = Object.entries(props.post)[0];
-const user = await getUser(data.user);
+const user = await getUserDocument(data.user);
 const { name, username } = Object.values(user as object)[0];
 const timeAgo = computed(() => {
   return new TimeAgo("en-US").format(data.timestamp, "twitter-minute-now");

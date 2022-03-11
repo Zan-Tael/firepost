@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import PostComponent from "@/components/PostItem.vue";
 import TopBar from "@/components/TopBar.vue";
-import { getPosts } from "@/utils/feedUtils";
-import { ref } from "vue";
-import type { PostDocument } from "@/types/global";
+import type { PostDocument, UserData, UserDocument } from "@/types/global";
 import { getAuth, signOut } from "firebase/auth";
 import { errorStore } from "@/utils/errorStore";
+import {
+  getCurrentUser,
+  getUserDocument,
+  getUserDocumentFromUsername,
+  userStore,
+} from "@/utils/userStore";
 
 const router = useRouter();
 
+const props = defineProps({
+  username: String,
+});
+
 function handleLogout() {
   const auth = getAuth();
-  signOut(auth).then(() => {
-    router.push("/login");
-  })
-    .catch((error) => (errorStore.value = error));;
+  signOut(auth)
+    .then(() => {
+      router.push("/login");
+    })
+    .catch((error) => (errorStore.value = error));
 }
 //
 // function handleDeleteUser() {
@@ -23,9 +31,8 @@ function handleLogout() {
 //   deleteUser(auth.currentUser!).then(() => router.push("/"))
 //     .catch((error) => (errorStore.value = error));;
 // }
-
-const posts = ref<Array<PostDocument>>([]);
-posts.value = await getPosts("qaNCQvo9nzTrWBEkP5LjBPEXoin1");
+const userDocument: UserDocument = await getUserDocumentFromUsername(props.username!)
+const userData = Object.values(userDocument)[0] as UserData;
 </script>
 
 <template>
@@ -36,8 +43,12 @@ posts.value = await getPosts("qaNCQvo9nzTrWBEkP5LjBPEXoin1");
         <button @click="handleLogout">Sign out</button></template
       >
     </TopBar>
-    <div>
-      <post-component v-for="(post, i) in posts" :key="i" :post="post" />
+    <div class="flex p-4 border-b">
+      <img class="w-24 h-24" :src="userData.photoURL" />
+      <div class="ml-4">
+        <div class="text-2xl">{{ userData.name }}</div>
+        <div class="mt-1 text-gray-500">@{{ userData.username }}</div>
+      </div>
     </div>
   </div>
 </template>

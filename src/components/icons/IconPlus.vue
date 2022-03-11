@@ -6,14 +6,3 @@
       <path d="M11 14h2v-3h3V9h-3V6h-2v3H8v2h3z"></path>
   </svg>
 </template>
-
-<script>
-export default {
-  props: {
-    solid: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
-</script>
