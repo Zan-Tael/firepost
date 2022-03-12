@@ -89,7 +89,7 @@ function handleRegister() {
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-4 mx-8 mt-12">
     <h1>Register</h1>
 
     <form @submit.prevent="handleRegister">
@@ -140,9 +140,12 @@ function handleRegister() {
           Pick a secure password to protect your account. Minimum 6 characters.
         </template>
       </input-component>
-      <button type="submit">Sign up</button>
+      <button type="submit" class="block w-full px-5 py-2 my-5 text-center font-medium rounded-md	text-white bg-indigo-400 hover:bg-indigo-600">Sign up</button>
     </form>
 
-    <router-link to="/login">I have an account</router-link>
+    <div class="flex justify-center">
+      <div>
+        <router-link to="/login" class="italic underline">I have an account</router-link>
+      </div></div>
   </div>
 </template>

@@ -49,7 +49,7 @@ function handleLogin() {
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-4 mx-8 mt-20">
     <form @submit.prevent="handleLogin">
       <input-component
         id="email"
@@ -69,9 +69,12 @@ function handleLogin() {
       >
         <template #label>Password</template>
       </input-component>
-      <button type="submit">Log in</button>
+      <button type="submit" class="block w-full px-5 py-2 my-5 text-center font-medium rounded-md	text-white bg-indigo-400 hover:bg-indigo-600">Log in</button>
     </form>
-
-    <router-link to="/register">Create an account</router-link>
+    <div class="flex justify-center">
+      <div>
+        <router-link class="italic underline" to="/register">Create an account</router-link>
+      </div>
+    </div>
   </div>
 </template>
