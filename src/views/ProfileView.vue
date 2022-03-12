@@ -44,7 +44,7 @@ const userData = Object.values(userDocument)[0] as UserData;
       >
     </TopBar>
     <div class="flex p-4 border-b">
-      <img class="w-24 h-24" :src="userData.photoURL" />
+      <img v-if="userData.photoURL" class="w-24 h-24" :src="userData.photoURL" />
       <div class="ml-4">
         <div class="text-2xl">{{ userData.name }}</div>
         <div class="mt-1 text-gray-500">@{{ userData.username }}</div>

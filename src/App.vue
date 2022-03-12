@@ -48,15 +48,14 @@ const routes = computed(() => {
                 <component :is="Component"></component>
 
                 <!-- loading state -->
-                <template #fallback><div class="p-4"></div> </template>
-              </Suspense>
-            </KeepAlive>
+                <template #fallback
+                  ><div class="p-4"></div>
+                </template> </Suspense
+            ></KeepAlive>
           </template>
         </RouterView>
       </div>
 
-      <BottomBar
-        v-if="userStore" />
-    </div
+      <BottomBar v-if="userStore" /></div
   ></Suspense>
 </template>
